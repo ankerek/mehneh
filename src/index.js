@@ -1,11 +1,12 @@
 import { AppContainer } from 'react-hot-loader';
 import ReactDOM from 'react-dom';
 import React from 'react';
+import configureStore from './store'; 
 
 import Root from './Root';
 
 const rootEl = document.getElementById('root');
-const store = {};
+const store = configureStore();
 
 ReactDOM.render(
   <AppContainer>
