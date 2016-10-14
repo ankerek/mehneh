@@ -55,6 +55,7 @@
     "koa-compose": "next",
     "koa-logger": "next",
     "koa-router": "7.0.1",
+    "material-ui": "^0.16.0",
     "path": "^0.12.7",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
