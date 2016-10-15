@@ -50,6 +50,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "flexboxgrid": "^6.3.1",
+    "history": "^4.3.0",
     "immutable": "^3.8.1",
     "koa": "^2.0.0-alpha.3",
     "koa-bodyparser": "^3.2.0",
