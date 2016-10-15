@@ -1,10 +1,11 @@
 const webpack = require('webpack');
 const path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const cssnext = require('postcss-cssnext');
 
 
 module.exports = {
-  devtool: 'cheap-eval-source-map',
+  devtool: 'cheap-module-eval-source-map',
   context: path.join(__dirname, '../src'),
   entry: [
     'react-hot-loader/patch',
@@ -20,19 +21,8 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.css$/,
-        loaders: [
-          'style',
-          'css'
-        ]
-      },
-      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        // loaders: [
-        //   // 'react-hot',
-        //   'babel-loader'
-        // ],
         loader: 'babel',
         query: {
           babelrc: false,
@@ -44,6 +34,21 @@ module.exports = {
             'transform-decorators-legacy',
           ]
         }
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: 'style-loader!css-loader?localIdentName=[local]__[path][name]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss-loader',
+      },
+      {
+        // Do not transform vendor's CSS with CSS-modules
+        // The point is that they remain in global scope.
+        // Since we require these CSS files in our JS or CSS files,
+        // they will be a part of our compilation either way.
+        // So, no need for ExtractTextPlugin here.
+        test: /\.css$/,
+        include: /node_modules/,
+        loaders: ['style', 'css'],
       },
     ],
   },
@@ -58,12 +63,19 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: Infinity,
-      //filename: 'vendor.bundle.js'
+      //minChunks: Infinity,
+      children: true,
+      minChunks: 2,
+      async: true,
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
-      debug: false
+      debug: false,
+      postcss: [
+        cssnext({
+          browsers: ['last 2 versions', 'IE > 10'],
+        }),
+      ]
     }),
     // new webpack.optimize.UglifyJsPlugin({
     //   compress: {
@@ -82,9 +94,7 @@ module.exports = {
       inject: true,
     })
   ],
+
   target: 'web', // Make web variables accessible to webpack, e.g. window
-  // devServer: {
-  //   contentBase: './src'
-  //   // hot: true
-  // }
+
 };
