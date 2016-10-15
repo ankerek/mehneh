@@ -41,6 +41,7 @@
     "postcss-loader": "^0.13.0",
     "precss": "^1.4.0",
     "react-hot-loader": "^3.0.0-beta.5",
+    "react-tap-event-plugin": "^1.0.0",
     "start-server-webpack-plugin": "^2.0.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
