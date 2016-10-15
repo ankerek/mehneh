@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import { App } from './app';
 
@@ -15,7 +16,9 @@ export default class Root extends Component {
     const { store } = this.props;
     return (
       <Provider store={store}>
-        <App />
+        <MuiThemeProvider>
+          <App />
+        </MuiThemeProvider>
       </Provider>
     );
   }

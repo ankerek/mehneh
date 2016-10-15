@@ -4,6 +4,7 @@ import { BrowserRouter, Match } from 'react-router';
 
 import { productsActions } from '../../products';
 
+import Header from './Header';
 import { Products } from '../../products';
 
 @connect(
@@ -21,7 +22,7 @@ export default class App extends Component {
 
     return (
       <div>
-        <h1>hello</h1>
+        <Header />
         <BrowserRouter>
           <Match pattern="/" component={Products} />
         </BrowserRouter>
