@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter, Match } from 'react-router';
+
 import { productsActions } from '../../products';
+
+import { Products } from '../../products';
 
 @connect(
   state => ({
@@ -16,7 +20,12 @@ export default class App extends Component {
   render() {
 
     return (
-      <h1>hello</h1>
+      <div>
+        <h1>hello</h1>
+        <BrowserRouter>
+          <Match pattern="/" component={Products} />
+        </BrowserRouter>
+      </div>
    );
   }
 }
