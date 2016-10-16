@@ -48,7 +48,7 @@ module.exports = {
         // So, no need for ExtractTextPlugin here.
         test: /\.css$/,
         include: /node_modules/,
-        loaders: ['style', 'css'],
+        loader: 'style!css',
       },
     ],
   },
