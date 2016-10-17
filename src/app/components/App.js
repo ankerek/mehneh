@@ -5,16 +5,19 @@ import { BrowserRouter, Match } from 'react-router';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
-import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import ShoppingBasketIcon from 'material-ui/svg-icons/action/shopping-basket';
+import StorageIcon from 'material-ui/svg-icons/device/storage';
+import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
 import { productsActions } from '../../products';
 
+import LinkContainer from './LinkContainer';
 import Header from './Header';
+import { CashDesk } from '../../cashdesk';
 import { Products } from '../../products';
 
 const contentStyles = {
-  'padding-left': 250,
+  'paddingLeft': 250,
 }
 
 @connect(
@@ -31,20 +34,24 @@ export default class App extends Component {
   render() {
 
     return (
-      <div>
-        <div style={contentStyles}>
-          <Header />
+      <BrowserRouter>
+        <div>
+          <Drawer width={250}>
+            <MenuItem containerElement={<LinkContainer activeOnlyWhenExact to="/" />} primaryText="Cashdesk" leftIcon={<ShoppingBasketIcon />} />
+            <MenuItem containerElement={<LinkContainer to="/products" />} primaryText="Products" leftIcon={<StorageIcon />} />
+            <MenuItem primaryText="Settings" leftIcon={<SettingsIcon />} />
+            <Divider />
+            <MenuItem><LinkContainer to="/products">Menu Item 3</LinkContainer></MenuItem>
+          </Drawer>
+            
+          <div style={contentStyles}>
+            <Header />
+            
+            <Match exactly pattern="/" component={CashDesk} />
+            <Match pattern="/products" component={Products} />
+          </div>
         </div>
-        <Drawer width={250}>
-          <MenuItem primaryText="Cashdesk" leftIcon={<ShoppingBasketIcon />} />
-          <MenuItem primaryText="Settings" leftIcon={<SettingsIcon />} />
-          <Divider />
-          <MenuItem>Menu Item 3</MenuItem>
-        </Drawer>
-        <BrowserRouter>
-          <Match pattern="/" component={Products} />
-        </BrowserRouter>
-      </div>
+      </BrowserRouter>
    );
   }
 }
