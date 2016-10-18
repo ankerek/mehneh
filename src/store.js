@@ -1,8 +1,10 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import createLogger from 'redux-logger';
 import { Iterable } from 'immutable';
 import rootReducer from './rootReducer';
+import rootSaga from './rootSaga';
 
 export default function configureStore(initialState) {
 
@@ -21,14 +23,18 @@ export default function configureStore(initialState) {
       return newState;
     }
   });
+
+  const sagaMiddleware = createSagaMiddleware();
     
-  const middlewares = [ thunk, logger ];
+  const middlewares = [ thunk, sagaMiddleware, logger ];
   
   const store = createStore(
     rootReducer,
     initialState,
     applyMiddleware(...middlewares)
   );
+
+  sagaMiddleware.run(rootSaga);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

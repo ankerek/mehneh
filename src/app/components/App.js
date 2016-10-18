@@ -28,7 +28,7 @@ const contentStyles = {
 export default class App extends Component {
 
   componentDidMount() {
-    this.props.dispatch(productsActions.fetchProductsSuccess());
+    this.props.dispatch(productsActions.fetchProductsRequest());
   }
 
   render() {
