@@ -13,6 +13,9 @@ const options = {
   stats: { 
     colors: true,
     chunks: false
+  },
+  proxy: {
+    '/api': `http://${config.host}:${config.port}`,
   }
 };
 
