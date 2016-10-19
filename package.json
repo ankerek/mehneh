@@ -58,6 +58,7 @@
     "koa-logger": "next",
     "koa-router": "7.0.1",
     "material-ui": "^0.16.0",
+    "mysql": "^2.11.1",
     "normalizr": "^2.2.1",
     "path": "^0.12.7",
     "react": "^15.3.2",
@@ -68,6 +69,7 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.7.0",
     "redux-saga": "^0.12.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "sequelize": "^3.24.4"
   }
 }
