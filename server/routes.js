@@ -1,5 +1,6 @@
 import Router from 'koa-router';
 import productsRouter from './api/products'
+import ordersRouter from './api/orders'
 
 const router = new Router();
 const apiRouter = new Router({
@@ -16,6 +17,7 @@ apiRouter.get('/', async ctx => {
 
 
 apiRouter.use(productsRouter.routes());
+apiRouter.use(ordersRouter.routes());
 
 router.use(apiRouter.routes());
 
