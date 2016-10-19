@@ -1,8 +1,9 @@
-import Sequelize from 'sequelize';
+export default function(sequelize, DataTypes) {
+  const Product = sequelize.define('Product', {
+    name: { type: DataTypes.STRING, allowNull: false }
+  }, { 
+    timestamps: false
+  });
 
-
-const Product = {
- name: { type: Sequelize.STRING, allowNull: false }
-};
-
-export default Product;
+  return Product;
+}

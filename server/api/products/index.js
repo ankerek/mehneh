@@ -1,4 +1,5 @@
 import Router from 'koa-router';
+import { models } from '../../db';
 
 const mockProducts = [
   { 
@@ -23,7 +24,13 @@ const router = new Router({
 });
 
 router.get('/', async ctx => {
-  ctx.body = mockProducts;
+  try {
+    const products = await models.Product.findAll();
+    ctx.body = products;
+  } catch(err) {
+    console.log(err);
+  }
+  
 });
 
 export default router;
