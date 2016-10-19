@@ -1,7 +1,25 @@
 import Koa from 'koa';
+import Sequelize from 'sequelize';
 import logger from 'koa-logger';
 import config from '../configs';
 import router from './routes'
+
+import ProductModel from './api/products/model';
+
+const db = new Sequelize(
+  config.database.name,
+  config.database.username,
+  config.database.password,
+  ...config.database.sequelize
+);
+
+const Product = db.define('product', ProductModel);
+
+Product.findOne().then(function (p) {
+  console.log(p.get('name'));
+});
+
+
 
 const app = new Koa();
 
