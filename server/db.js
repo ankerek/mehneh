@@ -5,6 +5,7 @@ import config from '../configs';
 
 export let models = {};
 
+// database connection configuration
 const sequelize = new Sequelize(
   config.database.name,
   config.database.username,
@@ -12,6 +13,7 @@ const sequelize = new Sequelize(
   ...config.database.sequelize
 );
 
+// read api directory and import model.js files
 const walk = dir => {
   fs
   .readdirSync(dir)
@@ -20,7 +22,7 @@ const walk = dir => {
       const model = sequelize.import(path.join(dir, file));
       models[model.name] = model;
     } else {
-      file = dir + '/' + file;
+      file = path.join(dir, file);
       const stat = fs.statSync(file);
       if(stat.isDirectory()) walk(file);
     }
