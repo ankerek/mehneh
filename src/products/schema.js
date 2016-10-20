@@ -1,4 +1,4 @@
 import { Schema, arrayOf } from 'normalizr';
 
-export const productSchema = new Schema('products');
-export const productsSchema = arrayOf(productSchema);
+export const product = new Schema('products');
+export const arrayOfProducts = arrayOf(product);
