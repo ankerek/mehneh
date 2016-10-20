@@ -13,23 +13,16 @@ const sequelize = new Sequelize(
   ...config.database.sequelize
 );
 
-// read api directory and import model.js files
-const walk = dir => {
-  fs
-  .readdirSync(dir)
-  .forEach(file => {
-    if(file === 'model.js') {
-      const model = sequelize.import(path.join(dir, file));
-      models[model.name] = model;
-    } else {
-      file = path.join(dir, file);
-      const stat = fs.statSync(file);
-      if(stat.isDirectory()) walk(file);
-    }
+// read models directory and import models
+fs
+  .readdirSync(path.join(__dirname, 'models'))
+  .filter(function(file) {
+    return (file.indexOf(".") !== 0) && (file !== "index.js");
   })
-}
-
-walk(__dirname + '/api');
+  .forEach(function(file) {
+    var model = sequelize.import(path.join(__dirname, 'models', file));
+    models[model.name] = model;
+  });
 
 Object.keys(models).forEach(function (modelName) {
   if (models[modelName].options.hasOwnProperty('associate')) {
