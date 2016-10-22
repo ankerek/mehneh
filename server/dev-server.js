@@ -5,7 +5,6 @@ import config from '../configs';
 
 const port = config.port + 1;
 
-
 const options = {
   publicPath: webpackConfig.output.publicPath,
   hot: true,
