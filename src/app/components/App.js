@@ -10,8 +10,6 @@ import StorageIcon from 'material-ui/svg-icons/device/storage';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import AttachMoneyIcon from 'material-ui/svg-icons/editor/attach-money';
 
-import { productsActions } from '../../products';
-
 import LinkContainer from './LinkContainer';
 import Header from './Header';
 import { CashDesk } from '../../cashdesk';
@@ -23,14 +21,10 @@ const contentStyles = {
 
 @connect(
   state => ({
-    products: state.products,
+    
   })
 )
 export default class App extends Component {
-
-  componentDidMount() {
-    this.props.dispatch(productsActions.fetchProductsRequest());
-  }
 
   render() {
     return (
