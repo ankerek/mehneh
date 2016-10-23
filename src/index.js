@@ -29,7 +29,7 @@ if (module.hot) {
     //const NextApp = require('./components/App').default;
     ReactDOM.render(
       <AppContainer>
-         <Root store={store} />
+        <Root store={store} />
       </AppContainer>,
       rootEl
     );
