@@ -1,7 +1,7 @@
-import webpack from 'webpack';
-import WebpackDevServer from 'webpack-dev-server';
-import webpackConfig from '../configs/webpack.dev.config';
-import config from '../configs';
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const webpackConfig = require('./webpack.dev.config');
+const config = require('./');
 
 const port = config.port + 1;
 

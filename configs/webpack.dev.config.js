@@ -2,14 +2,15 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const cssnext = require('postcss-cssnext');
+const config = require('./');
 
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   context: path.join(__dirname, '../src'),
   entry: [
+    //'webpack-dev-server/client?http://localhost:3001',
     'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:3001',
     'webpack/hot/only-dev-server',
     './index.js'
   ],
@@ -53,7 +54,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js'],
     modules: [
       path.resolve('../src'),
       'node_modules'
@@ -61,6 +62,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       //minChunks: Infinity,
@@ -94,6 +96,28 @@ module.exports = {
       inject: true,
     })
   ],
+
+  devServer: {
+    contentBase: '../src',
+    historyApiFallback: true,
+    host: config.host,
+    hot: true,
+    port: config.port + 1,
+    stats: {
+      cached: true,
+      cachedAssets: true,
+      chunks: true,
+      chunkModules: false,
+      colors: true,
+      hash: false,
+      reasons: true,
+      timings: true,
+      version: false
+    },
+    proxy: {
+      '/api': `http://${config.host}:${config.port}`,
+    }
+  },
 
   target: 'web', // Make web variables accessible to webpack, e.g. window
 

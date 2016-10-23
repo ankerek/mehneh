@@ -6,7 +6,7 @@
     "start": "npm run dev",
     "dev": "npm-run-all --parallel dev:server dev:client",
     "dev:server": "nodemon server --ignore src/",
-    "dev:client": "node configs/webpack.server",
+    "dev:client": "webpack-dev-server --config ./configs/webpack.dev.config",
     "build": "NODE_ENV=production webpack --progress --stats --config ./webpack/prod.config.js",
     "prod": "NODE_ENV=production node index",
     "dada": "webpack --config ./configs/webpack.dev.config.js",
