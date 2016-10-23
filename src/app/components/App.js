@@ -19,11 +19,6 @@ const contentStyles = {
   'paddingLeft': 250,
 }
 
-@connect(
-  state => ({
-    
-  })
-)
 export default class App extends Component {
 
   render() {
