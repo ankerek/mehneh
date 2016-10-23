@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "start": "node index.js",
+    "start": "npm run dev",
+    "dev": "npm-run-all --parallel dev:server dev:client",
+    "dev:server": "nodemon server --ignore src/",
+    "dev:client": "node configs/webpack.server",
     "build": "NODE_ENV=production webpack --progress --stats --config ./webpack/prod.config.js",
-    "build-windows": "SET NODE_ENV=production && webpack --progress --stats --config ./webpack/prod.config.js",
     "prod": "NODE_ENV=production node index",
-    "prod-windows": "SET NODE_ENV=production&&node index",
     "dada": "webpack --config ./configs/webpack.dev.config.js",
     "lint": "eslint src"
   },
